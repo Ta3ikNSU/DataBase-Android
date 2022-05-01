@@ -27,6 +27,6 @@ class AnnouncementsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val grid : GridView = view.findViewById(R.id.gridViewAnnouncement)
-        grid.adapter = GridViewAdapter(this.context)
+        grid.adapter = GridViewAdapter(view.context)
     }
 }
