@@ -11,9 +11,9 @@
         android:gravity="center"
         android:horizontalSpacing="5dp"
         android:numColumns="2"
+        android:padding="4dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="20dp"
-        >
+        android:verticalSpacing="20dp">
 
     </GridView>
 </androidx.constraintlayout.widget.ConstraintLayout>

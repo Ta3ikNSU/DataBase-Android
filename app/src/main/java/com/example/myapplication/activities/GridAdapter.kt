@@ -1,21 +1,17 @@
 package com.example.myapplication.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.media.Image
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.size
-import com.bumptech.glide.Glide
-import com.example.myapplication.DTO.CarDTO
-import com.example.myapplication.getData
+import com.example.myapplication.R
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
-import com.google.android.material.card.MaterialCardView
+import com.squareup.picasso.Picasso
 import java.util.*
 
 
@@ -33,33 +29,31 @@ class GridViewAdapter(
     override fun getItem(position: Int): Any {
 //        return cars[position]
 
-    return Random().nextInt()
+        return Random().nextInt()
     }
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val linearLayout = LinearLayout(mContext)
-        val card = MaterialCardView(mContext)
-        val image = ImageView(mContext)
+        val linearLayout = LayoutInflater.from(mContext).inflate(R.layout.ann_card, parent, false)
+        val image = linearLayout.findViewById<ImageView>(R.id.annCardImage);
+        val title = linearLayout.findViewById<TextView>(R.id.annCardTitle);
+        val desc = linearLayout.findViewById<TextView>(R.id.annCardDesc);
+//        Glide.with(mContext).load("http://goo.gl/gEgYUd").into(image);
+        val url: String = "https://www.meme-arsenal.com/memes/8882e44a1bb04091839c8586160890b9.jpg"
 
-        val insideLinearLayout = LinearLayout(mContext);
-        Glide.with(mContext).load("http://goo.gl/gEgYUd").into(image);
+        Picasso.get()
+            .load(url)
+            .placeholder(com.google.android.material.R.drawable.navigation_empty_icon)
+            .error(com.google.android.material.R.drawable.mtrl_ic_error)
+            .into(image);
 
-        val title = TextView(mContext)
-        val descText = TextView(mContext)
         title.text = "Z V я люблю гавно"
+        desc.text = "и обмазывать им сисечки"
 
-        descText.text = "и обмазывать им сисечки"
-        
-        insideLinearLayout.addView(image)
-        insideLinearLayout.addView(title)
-        insideLinearLayout.addView(descText)
-        card.addView(insideLinearLayout)
-//        card.layoutParams = ViewGroup.LayoutParams(parent!!.layoutParams.width, 150)
-        linearLayout.addView(card)
 //        price.text = "12341"
 //        price.text = cars[position].price.toString()
 //        card.addView(price)
