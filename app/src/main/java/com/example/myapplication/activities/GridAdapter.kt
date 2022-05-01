@@ -33,7 +33,7 @@ class GridViewAdapter(
     override fun getItem(position: Int): Any {
 //        return cars[position]
 
-    return Random().nextInt();
+    return Random().nextInt()
     }
 
     override fun getItemId(position: Int): Long {
@@ -45,6 +45,7 @@ class GridViewAdapter(
         val card = MaterialCardView(mContext)
         val image = ImageView(mContext)
 
+        val insideLinearLayout = LinearLayout(mContext);
         Glide.with(mContext).load("http://goo.gl/gEgYUd").into(image);
 
         val title = TextView(mContext)
@@ -52,11 +53,12 @@ class GridViewAdapter(
         title.text = "Z V я люблю гавно"
 
         descText.text = "и обмазывать им сисечки"
-
-        card.addView(image)
-        card.addView(title)
-        card.addView(descText)
-        card.layoutParams = ViewGroup.LayoutParams(parent!!.layoutParams.width, 150)
+        
+        insideLinearLayout.addView(image)
+        insideLinearLayout.addView(title)
+        insideLinearLayout.addView(descText)
+        card.addView(insideLinearLayout)
+//        card.layoutParams = ViewGroup.LayoutParams(parent!!.layoutParams.width, 150)
         linearLayout.addView(card)
 //        price.text = "12341"
 //        price.text = cars[position].price.toString()
