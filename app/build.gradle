@@ -1,7 +1,24 @@
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.10' // google-services plugin
+        classpath 'com.android.tools.build:gradle:3.4.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+
+//apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdk 31
@@ -53,15 +70,12 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.13.2'
     implementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.13.2'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation group: 'com.squareup.retrofit2', name: 'converter-jackson', version: '2.9.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
-    //glide
-    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //noinspection GradleCompatible
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
 
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 }

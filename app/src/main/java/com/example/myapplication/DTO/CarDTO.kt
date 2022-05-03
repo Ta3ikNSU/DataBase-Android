@@ -8,13 +8,7 @@ import lombok.ToString
 import lombok.experimental.FieldDefaults
 import lombok.extern.jackson.Jacksonized
 
-@Jacksonized
-@AllArgsConstructor
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Getter
-@ToString
-data class CarDTO (
+data class CarDTO(
     var brand: String? = null,
     var model: String? = null,
     var transmission: Int? = null,
@@ -27,5 +21,4 @@ data class CarDTO (
     var vinNumber: Long? = null,
     var description: String? = null,
     val price: Long? = null
-){
-}
+)

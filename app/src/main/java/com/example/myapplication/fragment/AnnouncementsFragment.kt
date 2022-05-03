@@ -2,7 +2,6 @@ package com.example.myapplication.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.VerifiedInputEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
@@ -26,7 +25,7 @@ class AnnouncementsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val grid : GridView = view.findViewById(R.id.gridViewAnnouncement)
+        val grid: GridView = view.findViewById(R.id.gridViewAnnouncement)
         grid.adapter = GridViewAdapter(view.context)
     }
 }

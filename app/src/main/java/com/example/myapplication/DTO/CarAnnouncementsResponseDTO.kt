@@ -9,14 +9,7 @@ import lombok.ToString
 import lombok.experimental.FieldDefaults
 import lombok.extern.jackson.Jacksonized
 
-@Jacksonized
-@AllArgsConstructor
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Getter
-@ToString
+
 data class CarAnnouncementsResponseDTO(
-    @JsonProperty("cars")
-    @Getter
     var cars: List<CarDTO?>
 )
