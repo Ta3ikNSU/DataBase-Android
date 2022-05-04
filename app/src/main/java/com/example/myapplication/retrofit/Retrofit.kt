@@ -4,44 +4,42 @@ package com.example.myapplication.retrofit
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
+import java.security.KeyStore
 import java.security.SecureRandom
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
-import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSocketFactory
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
+import javax.net.ssl.*
 
 object RetrofitClient {
-    const val ip: String = "192.168.56.1"
+    const val ip: String = "10.9.4.168"
     const val host: String = "8081"
 
     private var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://$ip:$host/")
         .addConverterFactory(JacksonConverterFactory.create())
-        .client(getUnsafeOkHttpClient().build())
+        .client(getUnsafeOkHttpClient()!!)
         .build()
 
-    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+    private fun getUnsafeOkHttpClient(): OkHttpClient? {
         return try {
             // Create a trust manager that does not validate certificate chains
             val trustAllCerts = arrayOf<TrustManager>(
                 object : X509TrustManager {
                     @Throws(CertificateException::class)
                     override fun checkClientTrusted(
-                        chain: Array<X509Certificate>,
-                        authType: String
+                        chain: Array<X509Certificate?>?,
+                        authType: String?
                     ) {
                     }
 
                     @Throws(CertificateException::class)
                     override fun checkServerTrusted(
-                        chain: Array<X509Certificate>,
-                        authType: String
+                        chain: Array<X509Certificate?>?,
+                        authType: String?
                     ) {
                     }
 
-                    override fun getAcceptedIssuers(): Array<X509Certificate> {
+                    override fun getAcceptedIssuers(): Array<X509Certificate?>? {
                         return arrayOf()
                     }
                 }
@@ -50,13 +48,25 @@ object RetrofitClient {
             // Install the all-trusting trust manager
             val sslContext = SSLContext.getInstance("SSL")
             sslContext.init(null, trustAllCerts, SecureRandom())
-
             // Create an ssl socket factory with our all-trusting manager
-            val sslSocketFactory: SSLSocketFactory = sslContext.socketFactory
+            val sslSocketFactory = sslContext.socketFactory
+            val trustManagerFactory: TrustManagerFactory =
+                TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+            trustManagerFactory.init(null as KeyStore?)
+            val trustManagers: Array<TrustManager> =
+                trustManagerFactory.trustManagers
+            check(!(trustManagers.size != 1 || trustManagers[0] !is X509TrustManager)) {
+                "Unexpected default trust managers:" + trustManagers.contentToString()
+            }
+
+            val trustManager =
+                trustManagers[0] as X509TrustManager
+
+
             val builder = OkHttpClient.Builder()
-            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
-            builder.hostnameVerifier { _, _ -> true }
-            builder
+            builder.sslSocketFactory(sslSocketFactory, trustManager)
+            builder.hostnameVerifier(HostnameVerifier { _, _ -> true })
+            builder.build()
         } catch (e: Exception) {
             throw RuntimeException(e)
         }

@@ -12,7 +12,10 @@ import com.google.android.gms.security.ProviderInstaller
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
-import javax.net.ssl.SSLContext
+import java.security.SecureRandom
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
+import javax.net.ssl.*
 
 
 class main : AppCompatActivity() {
@@ -36,6 +39,8 @@ class main : AppCompatActivity() {
         } catch (e: KeyManagementException) {
             e.printStackTrace()
         }
+
+        disableSSLCertificateChecking()
 
         setContentView(R.layout.activity_main)
         val chip: ChipNavigationBar = findViewById(R.id.bottom_menu)
@@ -63,5 +68,35 @@ class main : AppCompatActivity() {
             }
         }
 
+    }
+    fun disableSSLCertificateChecking() {
+        val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(object : X509TrustManager {
+            val acceptedIssuers: Array<Any?>?
+                get() = null
+
+            @Throws(CertificateException::class)
+            override fun checkClientTrusted(arg0: Array<X509Certificate?>?, arg1: String?) {
+                // Not implemented
+            }
+
+            @Throws(CertificateException::class)
+            override fun checkServerTrusted(arg0: Array<X509Certificate?>?, arg1: String?) {
+                // Not implemented
+            }
+
+            override fun getAcceptedIssuers(): Array<X509Certificate> {
+                TODO("Not yet implemented")
+            }
+        })
+        try {
+            val sc = SSLContext.getInstance("TLS")
+            sc.init(null, trustAllCerts, SecureRandom())
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.socketFactory)
+            HttpsURLConnection.setDefaultHostnameVerifier { hostname, session -> true }
+        } catch (e: KeyManagementException) {
+            e.printStackTrace()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        }
     }
 }

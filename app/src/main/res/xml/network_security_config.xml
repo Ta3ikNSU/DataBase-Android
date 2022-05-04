@@ -3,7 +3,7 @@
     <domain-config>
         <domain includeSubdomains="true">api.example.com</domain>
         <trust-anchors>
-            <certificates src="@raw/certificate" />
+<!--            <certificates src="@raw/certificate" />-->
         </trust-anchors>
     </domain-config>
 </network-security-config>
