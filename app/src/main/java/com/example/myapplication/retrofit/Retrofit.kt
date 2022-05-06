@@ -15,7 +15,7 @@ object RetrofitClient {
     const val host: String = "8081"
 
     private var retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://$ip:$host/")
+        .baseUrl("http://$ip:$host/")
         .addConverterFactory(JacksonConverterFactory.create())
         .client(getUnsafeOkHttpClient()!!)
         .build()

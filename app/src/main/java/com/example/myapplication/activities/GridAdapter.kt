@@ -1,6 +1,5 @@
 package com.example.myapplication.activities
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import com.example.myapplication.DTO.CarDTO
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitServices
 import com.example.myapplication.retrofit.RetrofitClient
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -51,28 +51,25 @@ class GridViewAdapter(
         return cars[position]!!.vinNumber!!
     }
 
-    @SuppressLint("ViewHolder", "SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val linearLayout = LayoutInflater.from(mContext).inflate(R.layout.ann_card, parent, false)
-        val image = linearLayout.findViewById<ImageView>(R.id.annCardImage)
+        val carPreview = linearLayout.findViewById<ImageView>(R.id.annCardImage)
         val title = linearLayout.findViewById<TextView>(R.id.annCardTitle)
         val price = linearLayout.findViewById<TextView>(R.id.annCardPrice)
+        val date = linearLayout.findViewById<TextView>(R.id.annCardDate)
 
-        val url = "https://www.meme-arsenal.com/memes/8882e44a1bb04091839c8586160890b9.jpg"
-
-//        Picasso.get()
-//            .load(url)
-//            .placeholder(com.google.android.material.R.drawable.navigation_empty_icon)
-//            .error(com.google.android.material.R.drawable.mtrl_ic_error)
-//            .into(image)
+        // пока так, в идеале добавить парс json'на
+        val url = cars[position]!!.announcementDTO!!.photoList
+        Picasso.get()
+            .load(url)
+            .placeholder(com.google.android.material.R.drawable.navigation_empty_icon)
+            .error(com.google.android.material.R.drawable.mtrl_ic_error)
+            .into(carPreview)
 
         title.text = cars[position]!!.brand + " " + cars[position]!!.model
-        price.text = cars[position]!!.price.toString()
+        price.text = cars[position]!!.announcementDTO!!.price.toString()
+        date.text = cars[position]!!.announcementDTO!!.startDate.toString()
 
-//        price.text = "12341"
-//        price.text = cars[position].price.toString()
-//        card.addView(price)
-//        return card
         return linearLayout
     }
 }

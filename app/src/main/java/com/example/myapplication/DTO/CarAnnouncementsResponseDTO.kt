@@ -11,5 +11,6 @@ import lombok.extern.jackson.Jacksonized
 
 
 data class CarAnnouncementsResponseDTO(
+    @JsonProperty("announcements")
     var cars: List<CarDTO?>
 )

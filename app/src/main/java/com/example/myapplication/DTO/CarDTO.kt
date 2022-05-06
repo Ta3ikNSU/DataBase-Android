@@ -20,5 +20,5 @@ data class CarDTO(
     var performance: Int? = null,
     var vinNumber: Long? = null,
     var description: String? = null,
-    val price: Long? = null
+    val announcementDTO: AnnouncementDTO? = null,
 )
