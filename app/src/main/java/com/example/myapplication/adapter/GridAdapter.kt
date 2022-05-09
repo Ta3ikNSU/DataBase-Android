@@ -1,13 +1,13 @@
 package com.example.myapplication.activities
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.myapplication.DTO.CarDTO
 import com.example.myapplication.R
 import com.squareup.picasso.Picasso
@@ -61,6 +61,8 @@ class AnnouncementsGridViewAdapter(
     }
 
     private fun openAnnouncement(car : CarDTO){
-        Toast.makeText(mContext, car.brand, car.brand!!.length).show()
+        val intent = Intent(mContext, AnnouncementActivity::class.java)
+        intent.putExtra("CarDTO", car)
+        mContext.startActivity(intent)
     }
 }

@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults
 import lombok.extern.jackson.Jacksonized
 
 data class CarDTO(
-    var brand: String? = null,
+    val brand: String? = null,
     var model: String? = null,
     var transmission: Int? = null,
     var gear: Int? = null,
@@ -19,6 +19,6 @@ data class CarDTO(
     var mileage: String? = null,
     var performance: Int? = null,
     var vinNumber: Long? = null,
-    var description: String? = null,
-    val announcementDTO: AnnouncementDTO? = null,
-)
+    val description: String? = null,
+    val announcementDTO: AnnouncementDTO? = null
+) : java.io.Serializable

@@ -21,4 +21,4 @@ data class AnnouncementDTO(
 
     @JsonProperty("photoList")
     val photoList : String?
-)
+) : java.io.Serializable

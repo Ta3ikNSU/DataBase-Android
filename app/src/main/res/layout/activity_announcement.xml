@@ -107,6 +107,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layoutManager="LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/act_ann_image_frame" />
 
     <TextView
