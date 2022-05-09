@@ -17,7 +17,6 @@ import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
-
 class main : AppCompatActivity() {
     private val tag: String = this.javaClass.name
 
@@ -69,7 +68,7 @@ class main : AppCompatActivity() {
         }
 
     }
-    fun disableSSLCertificateChecking() {
+    private fun disableSSLCertificateChecking() {
         val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(object : X509TrustManager {
             val acceptedIssuers: Array<Any?>?
                 get() = null

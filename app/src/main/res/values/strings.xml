@@ -3,4 +3,11 @@
     <string name="Announcements">Объявления</string>
     <string name="Menu">Меню</string>
     <string name="Details">Детали</string>
+    <string name="back_button">back button</string>
+    <string name="title">title</string>
+    <string name="price">99999 $</string>
+    <string name="car_preview_image">car preview image</string>
+    <string name="phone_number">Call to +7 (999) 999 99-99</string>
+    <string name="text_extra">Дополнительно: бла-бла</string>
+    <string name="downTitleTextExample">Объявление №..</string>
 </resources>
