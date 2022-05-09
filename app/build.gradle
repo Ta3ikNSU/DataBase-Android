@@ -40,11 +40,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 }
 
@@ -73,9 +73,13 @@ dependencies {
     implementation group: 'com.squareup.retrofit2', name: 'converter-jackson', version: '2.9.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    //noinspection GradleCompatible
+
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
 
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
+
+    implementation 'de.mindpipe.android:android-logging-log4j:1.0.3'
+    implementation 'log4j:log4j:1.2.17'
+
 }

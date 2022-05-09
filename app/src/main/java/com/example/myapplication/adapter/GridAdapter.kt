@@ -7,37 +7,19 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.myapplication.DTO.CarAnnouncementsRequestDTO
-import com.example.myapplication.DTO.CarAnnouncementsResponseDTO
+import android.widget.Toast
 import com.example.myapplication.DTO.CarDTO
 import com.example.myapplication.R
-import com.example.myapplication.RetrofitServices
-import com.example.myapplication.retrofit.RetrofitClient
 import com.squareup.picasso.Picasso
-import retrofit2.Call
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import org.apache.log4j.LogManager
+import org.apache.log4j.Logger
 
 
-class GridViewAdapter(
-    private val mContext: Context
+class AnnouncementsGridViewAdapter(
+    private val mContext: Context,
+    private val cars: ArrayList<CarDTO?>
 ) : BaseAdapter() {
-
-
-    val myExecutor: ExecutorService = Executors.newCachedThreadPool()
-
-    var cars: ArrayList<CarDTO?> = ArrayList()
-
-    init {
-        val apiService: RetrofitServices =
-            RetrofitClient.getClient().create(RetrofitServices::class.java)
-        val call: Call<CarAnnouncementsResponseDTO> = apiService.getAnnouncements(
-            carAnnouncementsRequestDTO = CarAnnouncementsRequestDTO()
-        )
-        myExecutor.execute {
-            cars.addAll(call.execute().body()!!.cars)
-        }
-    }
+    private val log: Logger = LogManager.getLogger(this.javaClass.name)
 
     override fun getCount(): Int {
         return cars.size
@@ -56,7 +38,7 @@ class GridViewAdapter(
         val carPreview = linearLayout.findViewById<ImageView>(R.id.annCardImage)
         val title = linearLayout.findViewById<TextView>(R.id.annCardTitle)
         val price = linearLayout.findViewById<TextView>(R.id.annCardPrice)
-        val date = linearLayout.findViewById<TextView>(R.id.annCardDate)
+        val date = linearLayout.findViewById<TextView>(R.id.annCardRegion)
 
         // пока так, в идеале добавить парс json'на
         val url = cars[position]!!.announcementDTO!!.photoList
@@ -67,9 +49,18 @@ class GridViewAdapter(
             .into(carPreview)
 
         title.text = cars[position]!!.brand + " " + cars[position]!!.model
-        price.text = cars[position]!!.announcementDTO!!.price.toString()
-        date.text = cars[position]!!.announcementDTO!!.startDate.toString()
+        price.text = cars[position]!!.announcementDTO!!.price.toString() + " ₽"
+        date.text = "Регион продажи: " + cars[position]!!.announcementDTO!!.region.toString()
 
+        log.info("add car to grid = {${cars[position]}}")
+
+        linearLayout.setOnClickListener {
+            openAnnouncement(cars[position]!!)
+        }
         return linearLayout
+    }
+
+    private fun openAnnouncement(car : CarDTO){
+        Toast.makeText(mContext, car.brand, car.brand!!.length).show()
     }
 }
