@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Не дром</string>
     <string name="Announcements">Объявления</string>
+    <string name="AddAnn">Добавить</string>
     <string name="Menu">Меню</string>
-    <string name="Details">Детали</string>
+    <string name="Details">Запчасти</string>
     <string name="back_button">back button</string>
     <string name="title">title</string>
     <string name="price">99999 $</string>
@@ -10,4 +11,5 @@
     <string name="phone_number">Call to +7 (999) 999 99-99</string>
     <string name="text_extra">Дополнительно: бла-бла</string>
     <string name="downTitleTextExample">Объявление №..</string>
+    <string name="filter_button">Добавить фильтр поиска</string>
 </resources>

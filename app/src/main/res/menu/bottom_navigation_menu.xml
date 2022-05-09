@@ -16,6 +16,13 @@
         android:title="@string/Details"
         />
     <item
+        android:id="@+id/addann"
+        android:enabled="true"
+        android:checked="false"
+        android:icon="@drawable/cog"
+        android:title="@string/AddAnn"
+        />
+    <item
         android:id="@+id/menu"
         android:enabled="true"
         android:checked="false"

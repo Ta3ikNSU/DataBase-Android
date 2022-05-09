@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.Button
 import android.widget.GridView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.myapplication.DTO.CarAnnouncementsRequestDTO
 import com.example.myapplication.DTO.CarAnnouncementsResponseDTO
@@ -23,9 +22,10 @@ import java.util.concurrent.Executors
 class AnnouncementsFragment : Fragment() {
 
     var cars: ArrayList<CarDTO?> = ArrayList()
-    lateinit var call : Call<CarAnnouncementsResponseDTO>
 
     var myExecutor: ExecutorService = Executors.newFixedThreadPool(2)
+
+    lateinit var adapter : AnnouncementsGridViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,23 +37,26 @@ class AnnouncementsFragment : Fragment() {
         )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun findAnnouncement(carAnnouncementsRequestDTO: CarAnnouncementsRequestDTO) {
         val apiService: RetrofitServices =
             RetrofitClient.getClient().create(RetrofitServices::class.java)
-        call = apiService.getAnnouncements(
-            carAnnouncementsRequestDTO = CarAnnouncementsRequestDTO()
-        )
-
-        val grid: GridView = view.findViewById(R.id.gridViewAnnouncement)
-        val adapter = AnnouncementsGridViewAdapter(view.context, cars)
-        grid.adapter = adapter
+        val call = apiService.getAnnouncements(carAnnouncementsRequestDTO)
         myExecutor.execute {
             cars.addAll(call.execute().body()!!.cars)
             activity?.runOnUiThread {
                 adapter.notifyDataSetChanged()
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val grid: GridView = view.findViewById(R.id.gridViewAnnouncement)
+        adapter = AnnouncementsGridViewAdapter(view.context, cars)
+        grid.adapter = adapter
+        findAnnouncement(CarAnnouncementsRequestDTO())
+
+        val button : Button = view.findViewById(R.id.button_filter)
+
     }
 }

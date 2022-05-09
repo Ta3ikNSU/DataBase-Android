@@ -1,5 +1,6 @@
 package com.example.myapplication.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -13,6 +14,7 @@ import com.google.android.material.button.MaterialButton
 
 
 class AnnouncementActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_announcement)
@@ -26,7 +28,6 @@ class AnnouncementActivity : AppCompatActivity() {
 
         val intent = this.intent
 
-//        val carDTO : CarDTO = intent.extras!!.get("CarDTO") as CarDTO
         val carDTO : CarDTO = intent.extras!!.getSerializable("CarDTO") as CarDTO
 
         nameTitle.text = "${carDTO.brand} ${carDTO.model}"
