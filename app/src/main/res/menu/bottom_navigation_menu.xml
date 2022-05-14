@@ -19,7 +19,7 @@
         android:id="@+id/addann"
         android:enabled="true"
         android:checked="false"
-        android:icon="@drawable/cog"
+        android:icon="@drawable/ic_baseline_add_24"
         android:title="@string/AddAnn"
         />
     <item

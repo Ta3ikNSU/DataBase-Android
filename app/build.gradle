@@ -82,4 +82,6 @@ dependencies {
     implementation 'de.mindpipe.android:android-logging-log4j:1.0.3'
     implementation 'log4j:log4j:1.2.17'
 
+    implementation 'com.github.florent37:expansionpanel:1.1.1'
+
 }

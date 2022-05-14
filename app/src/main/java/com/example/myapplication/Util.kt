@@ -10,7 +10,7 @@ fun carDtoToList(carDTO: CarDTO) : ArrayList<Pair<String, String>>{
     list.add(Pair("Мощность двигателя: ", carDTO.enginePower.toString()))
     list.add(Pair("vin: ", carDTO.vinNumber.toString()))
     list.add(Pair("Пробег: ", carDTO.mileage.toString()))
-    list.add(Pair("Пробег: ", carDTO.performance.toString()))
+    list.add(Pair("Комплектция: ", carDTO.performance.toString()))
 
     return list
 }

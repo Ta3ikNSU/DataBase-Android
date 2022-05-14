@@ -12,8 +12,8 @@ data class CarAnnouncementsRequestDTO(
     var color: List<Int>? = null,
     var mileage: List<String>? = null,
     var performance: List<Int>? = null,
-    var vinNumber: List<Long>? = null,
     var description: List<String>? = null,
     val minPrice: Long? = null,
-    val maxPrice: Long? = null
+    val maxPrice: Long? = null,
+    val state: AnnouncementState? = null
 )

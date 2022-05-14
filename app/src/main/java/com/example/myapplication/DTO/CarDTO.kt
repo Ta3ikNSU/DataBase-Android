@@ -11,13 +11,13 @@ import lombok.extern.jackson.Jacksonized
 data class CarDTO(
     val brand: String? = null,
     var model: String? = null,
-    var transmission: Int? = null,
-    var gear: Int? = null,
+    var transmission: String? = null,
+    var gear: String? = null,
     var engineCapacity: Int? = null,
     var enginePower: Int? = null,
     var color: Int? = null,
-    var mileage: String? = null,
-    var performance: Int? = null,
+    var mileage: Int? = null,
+    var performance: String? = null,
     var vinNumber: Long? = null,
     val description: String? = null,
     val announcementDTO: AnnouncementDTO? = null

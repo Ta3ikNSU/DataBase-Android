@@ -55,7 +55,6 @@ class AnnouncementsFragment : Fragment() {
         adapter = AnnouncementsGridViewAdapter(view.context, cars)
         grid.adapter = adapter
         findAnnouncement(CarAnnouncementsRequestDTO())
-
         val button : Button = view.findViewById(R.id.button_filter)
 
     }

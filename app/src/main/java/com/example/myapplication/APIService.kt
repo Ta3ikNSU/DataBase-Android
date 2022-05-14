@@ -17,8 +17,7 @@ interface RetrofitServices {
 
     @POST("car/announcements/{id}")
     fun getAnnouncementById(
-        @Body carAnnouncementsRequestDTO: CarAnnouncementsRequestDTO,
-        @Path("id") id: String
+        @Path("id") id: Long
     ):
             Call<CarDTO>
 
