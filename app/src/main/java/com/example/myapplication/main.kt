@@ -3,7 +3,6 @@ package com.example.myapplication
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.fragment.AddAnnouncementFragment
 import com.example.myapplication.fragment.AnnouncementsFragment
 import com.example.myapplication.fragment.DetailsFragment
 import com.example.myapplication.fragment.MenuFragment
@@ -54,11 +53,11 @@ class main : AppCompatActivity() {
                         .add(R.id.announcements_frame, AnnouncementsFragment()).commit()
                     android.util.Log.i(tag, "User come to car announcements")
                 }
-                R.id.addann -> {
-                    supportFragmentManager.beginTransaction()
-                        .add(R.id.announcements_frame, AddAnnouncementFragment()).commit()
-                    android.util.Log.i(tag, "User come to car announcements")
-                }
+//                R.id.addann -> {
+//                    supportFragmentManager.beginTransaction()
+//                        .add(R.id.announcements_frame, AddAnnouncementFragment()).commit()
+//                    android.util.Log.i(tag, "User come to car announcements")
+//                }
                 R.id.details -> {
                     supportFragmentManager.beginTransaction()
                         .add(R.id.announcements_frame, DetailsFragment()).commit()

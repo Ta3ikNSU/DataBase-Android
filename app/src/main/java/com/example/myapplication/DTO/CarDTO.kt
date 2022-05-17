@@ -15,7 +15,7 @@ data class CarDTO(
     var gear: String? = null,
     var engineCapacity: Int? = null,
     var enginePower: Int? = null,
-    var color: Int? = null,
+    var color: String? = null,
     var mileage: Int? = null,
     var performance: String? = null,
     var vinNumber: Long? = null,

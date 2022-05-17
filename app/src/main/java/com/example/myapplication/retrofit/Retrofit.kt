@@ -11,7 +11,7 @@ import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
 object RetrofitClient {
-    const val ip: String = "192.168.0.39"
+    const val ip: String = "192.168.0.113"
     const val host: String = "8081"
 
     private var retrofit: Retrofit = Retrofit.Builder()
