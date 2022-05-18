@@ -1,14 +1,25 @@
 package com.example.myapplication
 
 
-import com.example.myapplication.DTO.CarAnnouncementsRequestDTO
-import com.example.myapplication.DTO.CarAnnouncementsResponseDTO
-import com.example.myapplication.DTO.CarDTO
-import com.example.myapplication.DTO.CreateCarAnnouncementsRequestDTO
+import com.example.myapplication.DTO.*
+import com.google.rpc.context.AttributeContext
 import retrofit2.Call
 import retrofit2.http.*
 
 interface RetrofitServices {
+
+    @POST("authorize/register")
+    fun register(
+        @Body registerRequestDTO: RegisterRequestDTO
+    ):
+            Call<OkResponseDTO>
+
+    @POST("authorize/auth")
+    fun auth(
+        @Body registerRequestDTO: AuthRequestDTO
+    ):
+            Call<OkResponseDTO>
+
     @POST("car/announcements")
     fun getAnnouncements(
         @Body carAnnouncementsRequestDTO: CarAnnouncementsRequestDTO
