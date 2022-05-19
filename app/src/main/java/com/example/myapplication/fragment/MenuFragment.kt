@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.myapplication.DTO.AuthRequestDTO
-import com.example.myapplication.DTO.CarAnnouncementsRequestDTO
 import com.example.myapplication.DTO.OkResponseDTO
 import com.example.myapplication.DTO.RegisterRequestDTO
 import com.example.myapplication.Entity.User
@@ -22,31 +19,36 @@ import java.util.concurrent.Executors
 class MenuFragment(
     val user: User
 ) : Fragment() {
-
-    private fun sendRegisterRequest(mail : String, pwd : String) {
+    private fun sendRegisterRequest(mail: String, pwd: String) {
         val apiService: RetrofitServices =
             RetrofitClient.getClient().create(RetrofitServices::class.java)
         val call = apiService.register(RegisterRequestDTO(mail, pwd))
         myExecutor.execute {
-            val responseDTO : OkResponseDTO = call.execute().body()!!
-            if(responseDTO.success){
+            val responseDTO: OkResponseDTO = call.execute().body()!!
+            if (responseDTO.success) {
                 user.mail = mail
                 user.pwd = pwd
                 user.isAuth = true
+                activity?.runOnUiThread {
+                    authSuccess(user.mail, user.pwd)
+                }
             }
         }
     }
 
-    private fun sendAuthRequest(mail : String, pwd : String) {
+    private fun sendAuthRequest(mail: String, pwd: String) {
         val apiService: RetrofitServices =
             RetrofitClient.getClient().create(RetrofitServices::class.java)
         val call = apiService.auth(AuthRequestDTO(mail, pwd))
         myExecutor.execute {
-            val responseDTO : OkResponseDTO = call.execute().body()!!
-            if(responseDTO.success){
+            val responseDTO: OkResponseDTO = call.execute().body()!!
+            if (responseDTO.success) {
                 user.mail = mail
                 user.pwd = pwd
                 user.isAuth = true
+                activity?.runOnUiThread {
+                    authSuccess(user.mail, user.pwd)
+                }
             }
         }
     }
@@ -63,7 +65,7 @@ class MenuFragment(
             inButton.setOnClickListener {
                 val emailString = email.text.toString()
                 val pwdString = pwd.text.toString()
-                if(email.length() == 0 || pwd.length() == 0){
+                if (email.length() == 0 || pwd.length() == 0) {
                     val text = "Введите логин/пароль"
                     Toast.makeText(this.context, text, text.length).show()
                 } else {
@@ -73,22 +75,32 @@ class MenuFragment(
             upButton.setOnClickListener {
                 val emailString = email.text.toString()
                 val pwdString = pwd.text.toString()
-                val text = "Введите логин/пароль"
-                Toast.makeText(this.context, text, text.length).show()
-                sendRegisterRequest(emailString, pwdString)
+                if (email.length() == 0 || pwd.length() == 0) {
+                    val text = "Введите логин/пароль"
+                    Toast.makeText(this.context, text, text.length).show()
+                } else {
+                    sendRegisterRequest(emailString, pwdString)
+                }
             }
         } else {
-
-            val inButton: Button = view.findViewById(R.id.sign_in)
-            val upButton: Button = view.findViewById(R.id.sign_up)
-            val email: EditText = view.findViewById(R.id.email_edit_text)
-            val pwd: EditText = view.findViewById(R.id.password_edit_text)
-
-            inButton.visibility = View.INVISIBLE
-            upButton.visibility = View.INVISIBLE
-            email.visibility = View.INVISIBLE
-            pwd.visibility = View.INVISIBLE
+            authSuccess(user.mail, user.pwd)
         }
+    }
+
+    private fun authSuccess(mail: String, pwd: String) {
+        val inButton: Button = this.requireView().findViewById(R.id.sign_in)
+        val upButton: Button = this.requireView().findViewById(R.id.sign_up)
+        val emailText: EditText = this.requireView().findViewById(R.id.email_edit_text)
+        val pwdText: EditText = this.requireView().findViewById(R.id.password_edit_text)
+        inButton.visibility = View.INVISIBLE
+        upButton.visibility = View.INVISIBLE
+        emailText.visibility = View.INVISIBLE
+        pwdText.visibility = View.INVISIBLE
+
+        val gridView: GridView = this.requireView().findViewById(R.id.gridViewUserAnnouncement)
+        val up_text: TextView = this.requireView().findViewById(R.id.lk_text)
+        gridView.visibility = View.VISIBLE
+        up_text.visibility = View.VISIBLE
     }
 
     override fun onCreateView(

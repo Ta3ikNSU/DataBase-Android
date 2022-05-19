@@ -54,6 +54,7 @@ class main : AppCompatActivity() {
         val user: User = User()
         supportFragmentManager.beginTransaction()
             .add(R.id.announcements_frame, AnnouncementsFragment()).commit()
+        var prevItem: Int = R.id.ann
         chip.setOnItemSelectedListener {
             when (it) {
                 R.id.ann -> {
@@ -61,27 +62,32 @@ class main : AppCompatActivity() {
                         .replace(R.id.announcements_frame, AnnouncementsFragment()).commit()
                     supportFragmentManager.beginTransaction()
                     android.util.Log.i(tag, "User come to car announcements")
+                    prevItem = R.id.ann
                 }
                 R.id.addann -> {
                     if (user.isAuth) {
                         supportFragmentManager.beginTransaction()
                             .add(R.id.announcements_frame, AddAnnouncementFragment()).commit()
                         android.util.Log.i(tag, "User come to car announcements")
+                        prevItem = R.id.addann
                     } else {
-                        val text = "Авторизуйтесь, чтобы создать объявление"
+                        val text = "Зарегистрируйтесь или войдите в свой аккаунт, чтобы создать объявление"
                         Toast.makeText(this.applicationContext, text, text.length).show()
+                        chip.setItemSelected(prevItem)
                     }
                 }
                 R.id.details -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.announcements_frame, DetailsFragment()).commit()
                     android.util.Log.i(tag, "User come to details announcements ")
+                    prevItem = R.id.details
                 }
                 R.id.menu -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.announcements_frame, MenuFragment(user)).commit()
                     supportFragmentManager.beginTransaction()
                     android.util.Log.i(tag, "User come to menu")
+                    prevItem = R.id.menu
                 }
             }
         }
