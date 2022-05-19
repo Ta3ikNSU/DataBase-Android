@@ -2,7 +2,10 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.Entity.User
+import com.example.myapplication.fragment.AddAnnouncementFragment
 import com.example.myapplication.fragment.AnnouncementsFragment
 import com.example.myapplication.fragment.DetailsFragment
 import com.example.myapplication.fragment.MenuFragment
@@ -15,10 +18,14 @@ import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
-import javax.net.ssl.*
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 class main : AppCompatActivity() {
     private val tag: String = this.javaClass.name
+
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,34 +51,43 @@ class main : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val chip: ChipNavigationBar = findViewById(R.id.bottom_menu)
         chip.setItemSelected(R.id.ann)
+        val user: User = User()
         supportFragmentManager.beginTransaction()
             .add(R.id.announcements_frame, AnnouncementsFragment()).commit()
         chip.setOnItemSelectedListener {
             when (it) {
                 R.id.ann -> {
                     supportFragmentManager.beginTransaction()
-                        .add(R.id.announcements_frame, AnnouncementsFragment()).commit()
+                        .replace(R.id.announcements_frame, AnnouncementsFragment()).commit()
+                    supportFragmentManager.beginTransaction()
                     android.util.Log.i(tag, "User come to car announcements")
                 }
-//                R.id.addann -> {
-//                    supportFragmentManager.beginTransaction()
-//                        .add(R.id.announcements_frame, AddAnnouncementFragment()).commit()
-//                    android.util.Log.i(tag, "User come to car announcements")
-//                }
+                R.id.addann -> {
+                    if (user.isAuth) {
+                        supportFragmentManager.beginTransaction()
+                            .add(R.id.announcements_frame, AddAnnouncementFragment()).commit()
+                        android.util.Log.i(tag, "User come to car announcements")
+                    } else {
+                        val text = "Авторизуйтесь, чтобы создать объявление"
+                        Toast.makeText(this.applicationContext, text, text.length).show()
+                    }
+                }
                 R.id.details -> {
                     supportFragmentManager.beginTransaction()
-                        .add(R.id.announcements_frame, DetailsFragment()).commit()
+                        .replace(R.id.announcements_frame, DetailsFragment()).commit()
                     android.util.Log.i(tag, "User come to details announcements ")
                 }
                 R.id.menu -> {
                     supportFragmentManager.beginTransaction()
-                        .add(R.id.announcements_frame, MenuFragment()).commit()
+                        .replace(R.id.announcements_frame, MenuFragment(user)).commit()
+                    supportFragmentManager.beginTransaction()
                     android.util.Log.i(tag, "User come to menu")
                 }
             }
         }
 
     }
+
     private fun disableSSLCertificateChecking() {
         val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(object : X509TrustManager {
             val acceptedIssuers: Array<Any?>?

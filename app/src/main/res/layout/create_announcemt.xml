@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/brand_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Brand"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/brand_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/brand_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter brand"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/brand_create_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/model_create"/>
+
+    <TextView
+        android:id="@+id/model_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Model"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/model_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brand_create_text"
+        />
+
+    <EditText
+        android:id="@+id/model_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter model"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/model_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/brand_create"
+        />
+
+    <TextView
+        android:id="@+id/transmission_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Transmission"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/transmission_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/model_create"
+        />
+
+    <EditText
+        android:id="@+id/transmission_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter transmission"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/transmission_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/model_create"
+        />
+
+    <TextView
+        android:id="@+id/gear_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Gear"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/gear_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transmission_create_text" />
+
+    <EditText
+        android:id="@+id/gear_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter gear"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/transmission_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/transmission_create" />
+
+    <TextView
+        android:id="@+id/engineCapacity_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Engine capacity"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/engineCapacity_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gear_create_text" />
+
+    <EditText
+        android:id="@+id/engineCapacity_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter capacity"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/engineCapacity_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/gear_create" />
+
+    <TextView
+        android:id="@+id/enginePower_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Engine power"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/enginePower_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/engineCapacity_create_text" />
+
+    <EditText
+        android:id="@+id/enginePower_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter power"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/enginePower_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/engineCapacity_create" />
+
+    <TextView
+        android:id="@+id/color_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/color_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enginePower_create_text" />
+
+    <EditText
+        android:id="@+id/color_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter color"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/color_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/enginePower_create" />
+
+
+    <TextView
+        android:id="@+id/mileage_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Mileage"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/mileage_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/color_create_text" />
+
+    <EditText
+        android:id="@+id/mileage_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Etner mileage"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mileage_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/color_create" />
+
+    <TextView
+        android:id="@+id/performance_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Performance"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/performance_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mileage_create_text" />
+
+    <EditText
+        android:id="@+id/performance_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter Performance"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/performance_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/mileage_create" />
+
+    <TextView
+        android:id="@+id/vinNumber_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/vinNumber_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/performance_create_text" />
+
+    <EditText
+        android:id="@+id/vinNumber_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter color"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/vinNumber_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/performance_create" />
+
+    <TextView
+        android:id="@+id/description_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Description"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/description_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vinNumber_create_text" />
+
+    <EditText
+        android:id="@+id/description_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter description"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/description_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/vinNumber_create" />
+    <TextView
+        android:id="@+id/region_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Region"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/region_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_create_text" />
+
+    <EditText
+        android:id="@+id/region_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter region"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/region_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/description_create" />
+    <TextView
+        android:id="@+id/price_create_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Price"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/price_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/region_create_text" />
+
+    <EditText
+        android:id="@+id/price_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Enter price"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/price_create_text"
+        app:layout_constraintTop_toBottomOf="@+id/region_create" />
+
+    <Button
+        android:id="@+id/button_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Создать объявление"
+        android:backgroundTint="@color/colorPrimary"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

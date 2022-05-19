@@ -12,4 +12,6 @@
     <string name="text_extra">Дополнительно: бла-бла</string>
     <string name="downTitleTextExample">Объявление №..</string>
     <string name="filter_button">Добавить фильтр поиска</string>
+    <string name="sign_in">Вход</string>
+    <string name="sign_up">Регистрация</string>
 </resources>
