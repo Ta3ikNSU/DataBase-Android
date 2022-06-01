@@ -32,6 +32,11 @@ class MenuFragment(
                 activity?.runOnUiThread {
                     authSuccess(user.mail, user.pwd)
                 }
+            } else {
+                activity?.runOnUiThread {
+                    val text = "Ошибка сервера, попробуйте ещё раз"
+                    Toast.makeText(this.context, text, text.length).show()
+                }
             }
         }
     }
@@ -49,6 +54,11 @@ class MenuFragment(
                 activity?.runOnUiThread {
                     authSuccess(user.mail, user.pwd)
                 }
+            } else {
+                activity?.runOnUiThread {
+                    val text = "Неверный логин и/или пароль"
+                    Toast.makeText(this.context, text, text.length).show()
+                }
             }
         }
     }
@@ -65,8 +75,15 @@ class MenuFragment(
             inButton.setOnClickListener {
                 val emailString = email.text.toString()
                 val pwdString = pwd.text.toString()
+
                 if (email.length() == 0 || pwd.length() == 0) {
                     val text = "Введите логин/пароль"
+                    Toast.makeText(this.context, text, text.length).show()
+                } else if (android.util.Patterns.EMAIL_ADDRESS.matcher(emailString).matches()) {
+                    val text = "Ошибка при вводе почты"
+                    Toast.makeText(this.context, text, text.length).show()
+                } else if (pwd.length() < 8 || pwd.length() > 64) {
+                    val text = "Длина пароля не может быть меньше 8, и более 63 символов"
                     Toast.makeText(this.context, text, text.length).show()
                 } else {
                     sendAuthRequest(emailString, pwdString)
@@ -77,6 +94,12 @@ class MenuFragment(
                 val pwdString = pwd.text.toString()
                 if (email.length() == 0 || pwd.length() == 0) {
                     val text = "Введите логин/пароль"
+                    Toast.makeText(this.context, text, text.length).show()
+                } else if (android.util.Patterns.EMAIL_ADDRESS.matcher(emailString).matches()) {
+                    val text = "Ошибка при вводе почты"
+                    Toast.makeText(this.context, text, text.length).show()
+                } else if (pwd.length() < 8 || pwd.length() > 64) {
+                    val text = "Длина пароля не может быть меньше 8, и более 63 символов"
                     Toast.makeText(this.context, text, text.length).show()
                 } else {
                     sendRegisterRequest(emailString, pwdString)

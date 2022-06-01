@@ -8,10 +8,10 @@ data class AnnouncementDTO(
     val region:Int?,
 
     @JsonProperty("start_date")
-    val startDate:Timestamp?,
+    val startDate:String?,
 
     @JsonProperty("end_date")
-    val endDate:Timestamp?,
+    val endDate:String?,
 
     @JsonProperty("status")
     val state : AnnouncementState?,
