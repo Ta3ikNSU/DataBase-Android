@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/password_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/password_edit_text"
@@ -35,40 +34,40 @@
         android:id="@+id/sign_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/sign_up"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_edit_text"
-        android:backgroundTint="@color/colorPrimary"/>
+        app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
 
     <Button
         android:id="@+id/sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/sign_in"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up"
-        android:backgroundTint="@color/colorPrimary"/>
+        app:layout_constraintTop_toBottomOf="@+id/sign_up" />
+
     <TextView
         android:id="@+id/lk_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"
         android:gravity="center"
         android:minHeight="48dp"
         android:text="Ваши объявления:"
         android:textSize="18dp"
-        />
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <GridView
         android:id="@+id/gridViewUserAnnouncement"
@@ -82,11 +81,25 @@
         android:padding="4dp"
         android:stretchMode="columnWidth"
         android:verticalSpacing="20dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lk_text"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toBottomOf="@+id/lk_text">
+
+        <TextView
+            android:id="@+id/fav_ann_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="Избранные объявления"
+            android:textSize="18dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="+id/gridViewUserAnnouncement" />
+    </GridView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
