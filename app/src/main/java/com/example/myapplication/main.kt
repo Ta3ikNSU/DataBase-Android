@@ -53,13 +53,13 @@ class main : AppCompatActivity() {
         chip.setItemSelected(R.id.ann)
         val user: User = User()
         supportFragmentManager.beginTransaction()
-            .add(R.id.announcements_frame, AnnouncementsFragment()).commit()
+            .add(R.id.announcements_frame, AnnouncementsFragment(user)).commit()
         var prevItem: Int = R.id.ann
         chip.setOnItemSelectedListener {
             when (it) {
                 R.id.ann -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.announcements_frame, AnnouncementsFragment()).commit()
+                        .replace(R.id.announcements_frame, AnnouncementsFragment(user)).commit()
                     supportFragmentManager.beginTransaction()
                     android.util.Log.i(tag, "User come to car announcements")
                     prevItem = R.id.ann

@@ -19,6 +19,9 @@ import java.util.concurrent.Executors
 class MenuFragment(
     val user: User
 ) : Fragment() {
+
+    var myExecutor: ExecutorService = Executors.newFixedThreadPool(2)
+
     private fun sendRegisterRequest(mail: String, pwd: String) {
         val apiService: RetrofitServices =
             RetrofitClient.getClient().create(RetrofitServices::class.java)
@@ -63,7 +66,7 @@ class MenuFragment(
         }
     }
 
-    var myExecutor: ExecutorService = Executors.newFixedThreadPool(2)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

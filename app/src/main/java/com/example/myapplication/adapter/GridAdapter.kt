@@ -9,6 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.myapplication.DTO.CarDTO
+import com.example.myapplication.Entity.User
 import com.example.myapplication.R
 import com.squareup.picasso.Picasso
 import org.apache.log4j.LogManager
@@ -17,7 +18,8 @@ import org.apache.log4j.Logger
 
 class AnnouncementsGridViewAdapter(
     private val mContext: Context,
-    private val cars: ArrayList<CarDTO?>
+    private val cars: ArrayList<CarDTO?>,
+    private val user : User?
 ) : BaseAdapter() {
     private val log: Logger = LogManager.getLogger(this.javaClass.name)
 
@@ -63,6 +65,7 @@ class AnnouncementsGridViewAdapter(
     private fun openAnnouncement(car : CarDTO){
         val intent = Intent(mContext, AnnouncementActivity::class.java)
         intent.putExtra("CarDTO", car)
+        intent.putExtra("user", user)
         mContext.startActivity(intent)
     }
 }

@@ -1,9 +1,12 @@
 package com.example.myapplication.DTO
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.sql.Timestamp
 
 data class AnnouncementDTO(
+
+    @JsonProperty("id")
+    val id:Long?,
+
     @JsonProperty("region")
     val region:Int?,
 

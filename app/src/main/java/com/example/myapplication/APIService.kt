@@ -2,7 +2,6 @@ package com.example.myapplication
 
 
 import com.example.myapplication.DTO.*
-import com.google.rpc.context.AttributeContext
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -36,4 +35,16 @@ interface RetrofitServices {
     fun createAnnouncement(
         @Body createCarAnnouncementsRequestDTO: CreateCarAnnouncementsRequestDTO
     ): Call<CarAnnouncementsResponseDTO>
+
+    @POST("user/{mail}/{announcement_id}")
+    fun addFavoriteAnnouncement(
+        @Path("mail") mail: String,
+        @Path("announcement_id") announcement_id: Long
+    ): Call<OkResponseDTO>
+
+    @DELETE("user/{mail}/{announcement_id}")
+    fun deleteFavoriteAnnouncement(
+        @Path("mail") mail: String,
+        @Path("announcement_id") announcement_id: Long
+    ): Call<OkResponseDTO>
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.DTO.CarAnnouncementsRequestDTO
 import com.example.myapplication.DTO.CarAnnouncementsResponseDTO
 import com.example.myapplication.DTO.CarDTO
+import com.example.myapplication.Entity.User
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitServices
 import com.example.myapplication.activities.AnnouncementsGridViewAdapter
@@ -19,7 +20,11 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class AnnouncementsFragment : Fragment() {
+class AnnouncementsFragment() : Fragment() {
+    var user : User? = null
+    constructor(user: User) : this() {
+        this.user = user
+    }
 
     var cars: ArrayList<CarDTO?> = ArrayList()
 
@@ -52,7 +57,7 @@ class AnnouncementsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val grid: GridView = view.findViewById(R.id.gridViewAnnouncement)
-        adapter = AnnouncementsGridViewAdapter(view.context, cars)
+        adapter = AnnouncementsGridViewAdapter(view.context, cars, user)
         grid.adapter = adapter
         findAnnouncement(CarAnnouncementsRequestDTO())
         val button : Button = view.findViewById(R.id.button_filter)
