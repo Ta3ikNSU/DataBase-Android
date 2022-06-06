@@ -223,7 +223,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:minHeight="48dp"
-        android:text="Color"
+        android:text="Vin number"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/vinNumber_create"
         app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +234,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="13"
-        android:hint="Enter color"
+        android:hint="Enter vin number"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/vinNumber_create_text"
@@ -308,7 +308,7 @@
         app:layout_constraintTop_toBottomOf="@+id/region_create" />
 
     <Button
-        android:id="@+id/button_filter"
+        android:id="@+id/button_create_ann"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

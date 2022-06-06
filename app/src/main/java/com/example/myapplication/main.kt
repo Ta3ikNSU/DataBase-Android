@@ -52,6 +52,9 @@ class main : AppCompatActivity() {
         val chip: ChipNavigationBar = findViewById(R.id.bottom_menu)
         chip.setItemSelected(R.id.ann)
         val user: User = User()
+        user.mail = "ta3ik"
+        user.pwd = "12341234"
+        user.isAuth = true
         supportFragmentManager.beginTransaction()
             .add(R.id.announcements_frame, AnnouncementsFragment(user)).commit()
         var prevItem: Int = R.id.ann
@@ -64,10 +67,16 @@ class main : AppCompatActivity() {
                     android.util.Log.i(tag, "User come to car announcements")
                     prevItem = R.id.ann
                 }
+                R.id.details -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.announcements_frame, DetailsFragment()).commit()
+                    android.util.Log.i(tag, "User come to details announcements ")
+                    prevItem = R.id.details
+                }
                 R.id.addann -> {
                     if (user.isAuth) {
                         supportFragmentManager.beginTransaction()
-                            .add(R.id.announcements_frame, AddAnnouncementFragment()).commit()
+                            .replace(R.id.announcements_frame, AddAnnouncementFragment(user)).commit()
                         android.util.Log.i(tag, "User come to car announcements")
                         prevItem = R.id.addann
                     } else {
@@ -75,12 +84,6 @@ class main : AppCompatActivity() {
                         Toast.makeText(this.applicationContext, text, text.length).show()
                         chip.setItemSelected(prevItem)
                     }
-                }
-                R.id.details -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.announcements_frame, DetailsFragment()).commit()
-                    android.util.Log.i(tag, "User come to details announcements ")
-                    prevItem = R.id.details
                 }
                 R.id.menu -> {
                     supportFragmentManager.beginTransaction()

@@ -20,9 +20,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class AnnouncementActivity(
-
-) : AppCompatActivity() {
+class AnnouncementActivity : AppCompatActivity() {
 
     var myExecutor: ExecutorService = Executors.newFixedThreadPool(2)
 
@@ -66,14 +64,17 @@ class AnnouncementActivity(
         val star: CheckBox = findViewById(R.id.checkBox)
         star.setOnClickListener {
             if (user.isAuth) {
-                if(!star.isChecked){
+                if (!star.isChecked) {
                     val call =
-                        apiService.deleteFavoriteAnnouncement(user.mail, carDTO.announcementDTO!!.id!!)
+                        apiService.deleteFavoriteAnnouncement(
+                            user.mail,
+                            carDTO.announcementDTO!!.id!!
+                        )
                     myExecutor.execute {
                         val response: OkResponseDTO? = call.execute().body()
                         if (response!!.success) {
                             runOnUiThread {
-                                star.isChecked = false;
+                                star.isChecked = false
                             }
                         }
                     }
@@ -84,7 +85,7 @@ class AnnouncementActivity(
                         val response: OkResponseDTO? = call.execute().body()
                         if (response!!.success) {
                             runOnUiThread {
-                                star.isChecked = true;
+                                star.isChecked = true
                             }
                         }
                     }

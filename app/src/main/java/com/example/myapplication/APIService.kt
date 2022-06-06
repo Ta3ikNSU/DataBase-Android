@@ -34,7 +34,7 @@ interface RetrofitServices {
     @PUT("car/create")
     fun createAnnouncement(
         @Body createCarAnnouncementsRequestDTO: CreateCarAnnouncementsRequestDTO
-    ): Call<CarAnnouncementsResponseDTO>
+    ): Call<CreateCarAnnouncementsResponseDTO>
 
     @POST("user/{mail}/{announcement_id}")
     fun addFavoriteAnnouncement(
