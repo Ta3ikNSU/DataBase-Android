@@ -36,13 +36,13 @@ interface RetrofitServices {
         @Body createCarAnnouncementsRequestDTO: CreateCarAnnouncementsRequestDTO
     ): Call<CreateCarAnnouncementsResponseDTO>
 
-    @POST("user/{mail}/{announcement_id}")
+    @POST("user/favorites/{mail}/{announcement_id}")
     fun addFavoriteAnnouncement(
         @Path("mail") mail: String,
         @Path("announcement_id") announcement_id: Long
     ): Call<OkResponseDTO>
 
-    @DELETE("user/{mail}/{announcement_id}")
+    @DELETE("user/favorites/{mail}/{announcement_id}")
     fun deleteFavoriteAnnouncement(
         @Path("mail") mail: String,
         @Path("announcement_id") announcement_id: Long
