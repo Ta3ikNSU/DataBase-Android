@@ -7,44 +7,70 @@ import retrofit2.http.*
 
 interface RetrofitServices {
 
-    @POST("authorize/register")
+    @POST("/authorize/register")
     fun register(
         @Body registerRequestDTO: RegisterRequestDTO
-    ):
-            Call<OkResponseDTO>
+    ): Call<ProfileDTO>
 
-    @POST("authorize/auth")
+    @POST("/authorize/auth")
     fun auth(
         @Body registerRequestDTO: AuthRequestDTO
-    ):
-            Call<OkResponseDTO>
+    ): Call<ProfileDTO>
 
-    @POST("car/announcements")
+    @POST("/car/announcements")
     fun getAnnouncements(
         @Body carAnnouncementsRequestDTO: CarAnnouncementsRequestDTO
-    ):
-            Call<CarAnnouncementsResponseDTO>
+    ): Call<CarAnnouncementsResponseDTO>
 
-    @POST("car/announcements/{id}")
+    @POST("/car/announcements/{id}")
     fun getAnnouncementById(
         @Path("id") id: Long
-    ):
-            Call<CarDTO>
+    ): Call<CarDTO>
 
     @PUT("car/create")
     fun createAnnouncement(
         @Body createCarAnnouncementsRequestDTO: CreateCarAnnouncementsRequestDTO
     ): Call<CreateCarAnnouncementsResponseDTO>
 
-    @POST("user/favorites/{mail}/{announcement_id}")
+    @POST("/favorites/{mail}/{announcement_id}")
     fun addFavoriteAnnouncement(
         @Path("mail") mail: String,
         @Path("announcement_id") announcement_id: Long
     ): Call<OkResponseDTO>
 
-    @DELETE("user/favorites/{mail}/{announcement_id}")
+    @DELETE("/user/favorites/{mail}/{announcement_id}")
     fun deleteFavoriteAnnouncement(
         @Path("mail") mail: String,
         @Path("announcement_id") announcement_id: Long
     ): Call<OkResponseDTO>
+
+    @POST("/user/{mail}/{announcement_id}/{state}")
+    fun updateAnnouncementStateById(
+        @Path("mail") mail: String,
+        @Path("announcement_id") announcement_id: Long,
+        @Path("state") state: Int,
+    ): Call<Nothing>
+
+    @POST("/admin/{mail}/cars")
+    fun getAdminAnnouncement(
+        @Path("mail") mail: String,
+    ): Call<CarAnnouncementsResponseDTO>
+
+    @DELETE("/admin/{mail}/cars/{id}")
+    fun deleteReview(
+        @Path("mail") mail: String,
+        @Path("id") id: Long,
+    ): Call<Nothing>
+
+    @POST("/admin/{mail}/review")
+    fun updateAnnouncement(
+        @Path("mail") mail: String,
+        @Body reviewDTO: ReviewDTO
+    ): Call<Nothing>
+
+    @DELETE("/admin/{mail}/review")
+    fun deleteReview(
+        @Path("mail") mail: String,
+        @Body reviewDTO: ReviewDTO
+    ): Call<Nothing>
 }

@@ -1,18 +1,21 @@
 package com.example.myapplication.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import com.example.myapplication.DTO.AuthRequestDTO
-import com.example.myapplication.DTO.OkResponseDTO
-import com.example.myapplication.DTO.RegisterRequestDTO
+import com.example.myapplication.DTO.*
 import com.example.myapplication.Entity.User
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitServices
+import com.example.myapplication.activities.AdminAnnouncementActivity
+import com.example.myapplication.activities.AnnouncementActivity
+import com.example.myapplication.activities.AnnouncementsGridViewAdapter
 import com.example.myapplication.retrofit.RetrofitClient
+import retrofit2.await
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -27,13 +30,19 @@ class MenuFragment(
             RetrofitClient.getClient().create(RetrofitServices::class.java)
         val call = apiService.register(RegisterRequestDTO(mail, pwd))
         myExecutor.execute {
-            val responseDTO: OkResponseDTO = call.execute().body()!!
-            if (responseDTO.success) {
+            val responseDTO: ProfileDTO = call.execute().body()!!
+            if (responseDTO.mail != null && responseDTO.nickname != null) {
                 user.mail = mail
                 user.pwd = pwd
                 user.isAuth = true
-                activity?.runOnUiThread {
-                    authSuccess(user.mail, user.pwd)
+                if(responseDTO.role == "ADMIN"){
+                    activity?.runOnUiThread {
+                        authAdminSuccess(user.mail, user.pwd)
+                    }
+                }else {
+                    activity?.runOnUiThread {
+                        authSuccess(user.mail, user.pwd)
+                    }
                 }
             } else {
                 activity?.runOnUiThread {
@@ -49,13 +58,19 @@ class MenuFragment(
             RetrofitClient.getClient().create(RetrofitServices::class.java)
         val call = apiService.auth(AuthRequestDTO(mail, pwd))
         myExecutor.execute {
-            val responseDTO: OkResponseDTO = call.execute().body()!!
-            if (responseDTO.success) {
+            val responseDTO: ProfileDTO = call.execute().body()!!
+            if (responseDTO.mail != null && responseDTO.nickname != null) {
                 user.mail = mail
                 user.pwd = pwd
                 user.isAuth = true
-                activity?.runOnUiThread {
-                    authSuccess(user.mail, user.pwd)
+                if(responseDTO.role == "ADMIN"){
+                    activity?.runOnUiThread {
+                        authAdminSuccess(user.mail, user.pwd)
+                    }
+                }else {
+                    activity?.runOnUiThread {
+                        authSuccess(user.mail, user.pwd)
+                    }
                 }
             } else {
                 activity?.runOnUiThread {
@@ -110,6 +125,11 @@ class MenuFragment(
             }
         } else {
             authSuccess(user.mail, user.pwd)
+
+            val gridView: GridView = this.requireView().findViewById(R.id.gridViewUserAnnouncement)
+            var cars: ArrayList<CarDTO?> = ArrayList()
+            var adapter = AnnouncementsGridViewAdapter(view.context, cars, user)
+            gridView.adapter = adapter
         }
     }
 
@@ -128,6 +148,48 @@ class MenuFragment(
         gridView.visibility = View.VISIBLE
         up_text.visibility = View.VISIBLE
     }
+
+    private fun authAdminSuccess(mail: String, pwd: String) {
+        var cars: ArrayList<CarDTO?> = ArrayList()
+        val apiService: RetrofitServices =
+            RetrofitClient.getClient().create(RetrofitServices::class.java)
+        val call = apiService.getAdminAnnouncement(mail)
+        myExecutor.execute {
+            cars.addAll(call.execute().body()!!.cars)
+        }
+
+        val inButton: Button = this.requireView().findViewById(R.id.sign_in)
+        val upButton: Button = this.requireView().findViewById(R.id.sign_up)
+        val emailText: EditText = this.requireView().findViewById(R.id.email_edit_text)
+        val pwdText: EditText = this.requireView().findViewById(R.id.password_edit_text)
+        inButton.visibility = View.INVISIBLE
+        upButton.visibility = View.INVISIBLE
+        emailText.visibility = View.INVISIBLE
+        pwdText.visibility = View.INVISIBLE
+
+        val admin_anns: Button = this.requireView().findViewById(R.id.admin_anns)
+        admin_anns.visibility = View.VISIBLE
+        val admin_accidents: Button = this.requireView().findViewById(R.id.admin_accidents)
+        admin_accidents.visibility = View.VISIBLE
+        val admin_reviews: Button = this.requireView().findViewById(R.id.admin_reviews)
+        admin_reviews.visibility = View.VISIBLE
+
+        admin_anns.setOnClickListener{
+            val intent = Intent(requireView().context, AdminAnnouncementActivity::class.java)
+            intent.putExtra("cars", cars)
+            intent.putExtra("user", user)
+            requireView().context.startActivity(intent)
+        }
+
+        admin_accidents.setOnClickListener{
+
+        }
+
+        admin_reviews.setOnClickListener {
+
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -11,11 +11,11 @@ import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
 object RetrofitClient {
-    const val ip: String = "10.9.32.30"
-    const val host: String = "8081"
+    const val ip: String = "192.168.0.113"
+    const val host: String = "8080"
 
     private var retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("http://$ip:$host/")
+        .baseUrl("http://$ip:$host")
         .addConverterFactory(JacksonConverterFactory.create())
         .client(getUnsafeOkHttpClient()!!)
         .build()

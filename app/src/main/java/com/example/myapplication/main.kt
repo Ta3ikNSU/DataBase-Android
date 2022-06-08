@@ -52,9 +52,6 @@ class main : AppCompatActivity() {
         val chip: ChipNavigationBar = findViewById(R.id.bottom_menu)
         chip.setItemSelected(R.id.ann)
         val user: User = User()
-        user.mail = "ta3ik"
-        user.pwd = "12341234"
-        user.isAuth = true
         supportFragmentManager.beginTransaction()
             .add(R.id.announcements_frame, AnnouncementsFragment(user)).commit()
         var prevItem: Int = R.id.ann
