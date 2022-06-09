@@ -5,11 +5,7 @@ import lombok.Builder
 import java.io.Serializable
 
 @Builder
-data class ReviewDTO(
-
-    @JsonProperty("id")
-    var id: Long,
-
-    @JsonProperty("description")
-    var description: String
+data class ReviewsResponseDTO (
+    @JsonProperty("reviews")
+    var reviewDTOList: List<ReviewDTO>
 ) : Serializable

@@ -17,8 +17,8 @@ class ReviewActivity : AppCompatActivity() {
     var myExecutor: ExecutorService = Executors.newFixedThreadPool(2)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val reviews: List<ReviewDTO?> =
-            this.intent.extras!!.getSerializable("cars") as List<ReviewDTO>
+        val reviews: ArrayList<ReviewDTO> =
+            this.intent.extras!!.getSerializable("reviews") as ArrayList<ReviewDTO>
         val user: User = intent.extras!!.getSerializable("user") as User
         setContentView(R.layout.admin_anns)
         val backbutton: ImageButton = findViewById(R.id.act_ann_button_back_admin)
@@ -27,11 +27,11 @@ class ReviewActivity : AppCompatActivity() {
         }
 
         val descriptions = Array(reviews.size) { "" }
-        for (i in 0..descriptions.size) {
+        for (i in descriptions.indices) {
             descriptions.set(i, reviews.get(i)!!.description)
         }
 
-        val listView: ListView = findViewById(R.id.admin_anns)
+        val listView: ListView = findViewById(R.id.admin_anns_list)
         listView.adapter = ArrayAdapter(this, R.layout.admin_anns, descriptions)
 
         listView.setOnItemClickListener { parent, view, position, id ->

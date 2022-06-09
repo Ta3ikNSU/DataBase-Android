@@ -56,6 +56,11 @@ interface RetrofitServices {
         @Path("mail") mail: String,
     ): Call<CarAnnouncementsResponseDTO>
 
+    @POST("/admin/{mail}/reviews")
+    fun getReviews(
+        @Path("mail") mail: String
+    ): Call<ReviewsResponseDTO>
+
     @DELETE("/admin/{mail}/cars/{id}")
     fun deleteReview(
         @Path("mail") mail: String,

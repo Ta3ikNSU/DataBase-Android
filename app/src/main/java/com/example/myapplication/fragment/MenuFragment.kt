@@ -12,10 +12,9 @@ import com.example.myapplication.Entity.User
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitServices
 import com.example.myapplication.activities.AdminAnnouncementActivity
-import com.example.myapplication.activities.AnnouncementActivity
 import com.example.myapplication.activities.AnnouncementsGridViewAdapter
+import com.example.myapplication.activities.ReviewActivity
 import com.example.myapplication.retrofit.RetrofitClient
-import retrofit2.await
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -153,9 +152,15 @@ class MenuFragment(
         var cars: ArrayList<CarDTO?> = ArrayList()
         val apiService: RetrofitServices =
             RetrofitClient.getClient().create(RetrofitServices::class.java)
-        val call = apiService.getAdminAnnouncement(mail)
+        val callCars = apiService.getAdminAnnouncement(mail)
         myExecutor.execute {
-            cars.addAll(call.execute().body()!!.cars)
+            cars.addAll(callCars.execute().body()!!.cars)
+        }
+
+        var reviews: ArrayList<ReviewDTO> = ArrayList()
+        val callREviews = apiService.getReviews(mail)
+        myExecutor.execute {
+            reviews.addAll(callREviews.execute().body()!!.reviewDTOList)
         }
 
         val inButton: Button = this.requireView().findViewById(R.id.sign_in)
@@ -167,7 +172,7 @@ class MenuFragment(
         emailText.visibility = View.INVISIBLE
         pwdText.visibility = View.INVISIBLE
 
-        val admin_anns: Button = this.requireView().findViewById(R.id.admin_anns)
+        val admin_anns: Button = this.requireView().findViewById(R.id.admin_anns_button)
         admin_anns.visibility = View.VISIBLE
         val admin_accidents: Button = this.requireView().findViewById(R.id.admin_accidents)
         admin_accidents.visibility = View.VISIBLE
@@ -186,7 +191,10 @@ class MenuFragment(
         }
 
         admin_reviews.setOnClickListener {
-
+            val intent = Intent(requireView().context, ReviewActivity::class.java)
+            intent.putExtra("reviews", reviews)
+            intent.putExtra("user", user)
+            requireView().context.startActivity(intent)
         }
     }
 

@@ -1,7 +1,12 @@
 package com.example.myapplication.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -15,27 +20,31 @@ import com.example.myapplication.retrofit.RetrofitClient
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+
 class AdminAnnouncementActivity : AppCompatActivity() {
 
     var myExecutor: ExecutorService = Executors.newFixedThreadPool(2)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val cars: List<CarDTO?> = this.intent.extras!!.getSerializable("cars") as List<CarDTO>
+        val cars: ArrayList<CarDTO> = this.intent.extras!!.getSerializable("cars") as ArrayList<CarDTO>
         val user: User = intent.extras!!.getSerializable("user") as User
-        setContentView(R.layout.admin_anns)
+        val inflater = LayoutInflater.from(this)
+        val view : View = inflater.inflate(R.layout.admin_anns, null, false);
+
+        setContentView(view)
+        val listView : ListView  = findViewById(R.id.admin_anns_list)
         val backbutton: ImageButton = findViewById(R.id.act_ann_button_back_admin)
         backbutton.setOnClickListener {
             finish()
         }
 
         val cars_name = Array(cars.size) { "" }
-        for (i in 0..cars_name.size) {
+        for (i in cars_name.indices) {
             cars_name.set(i, cars.get(i)!!.brand.toString() + cars.get(i)!!.model.toString())
         }
 
-        val listView: ListView = findViewById(R.id.admin_anns)
-        listView.adapter = ArrayAdapter(this, R.layout.admin_anns, cars_name)
+        listView.adapter = ArrayAdapter(this, R.layout.admin_anns, R.id.car_name, cars_name)
 
         listView.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(view.context, AnnouncementActivity::class.java)

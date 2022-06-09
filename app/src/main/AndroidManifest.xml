@@ -26,6 +26,22 @@
             android:name=".activities.AnnouncementActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".activities.AdminAnnouncementActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".activities.AdminChangeableAnnouncement"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".activities.ReviewActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".activities.AdminChangeableReview"
+            android:exported="true">
+        </activity>
     </application>
 
 

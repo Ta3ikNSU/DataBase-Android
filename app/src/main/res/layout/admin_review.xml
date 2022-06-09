@@ -18,9 +18,9 @@
         android:id="@+id/review_admin_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="id/my_act_ann_button_back" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/delete_button_review"
